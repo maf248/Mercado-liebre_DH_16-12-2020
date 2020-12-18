@@ -22,8 +22,7 @@ const controller = {
 		},
 	search: (req, res) => {
 		let resultados = [];
-		var busqueda = req.query.keywords;
-		let resultado = {};
+		
 		products.forEach(producto => {
 			if(req.query.keywords.length != 0 && producto.name.toLowerCase().includes(req.query.keywords.toLowerCase())) {
 				resultados.push(producto);
