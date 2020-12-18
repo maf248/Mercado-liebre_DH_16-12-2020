@@ -25,30 +25,17 @@ const controller = {
 		var busqueda = req.query.keywords;
 		let resultado = {};
 		products.forEach(producto => {
-			if(producto.name.includes(req.query.keywords)) {
+			if(req.query.keywords.length != 0 && producto.name.toLowerCase().includes(req.query.keywords.toLowerCase())) {
 				resultados.push(producto);
 			}
-	});
-
-		//resultado = products.find(producto => producto.name == req.query.keywords);
-
-		/*function search(palabras, productos){
-			for (var i=0; i < products.length; i++) {
-				if (products[i].name === busqueda) {
-					return products[i];
-				}
-			}
-		}
-		resultado = search(busqueda, products);
-		*/
-		console.log(resultados);
+		});
 		
 		let cantidad = 0;
-		if (resultados == undefined) {
+		if (resultados == []) {
 			cantidad = 0;
 		} else cantidad = resultados.length;
 
-		res.render('results', {producto: resultado, toThousand: toThousand, cantidad: cantidad});
+		res.render('results', {productosSearch: resultados, toThousand: toThousand, cantidad: cantidad});
 		}
 	
 };
